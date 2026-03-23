@@ -8,6 +8,9 @@ import Settings from './pages/Settings';
 import EngagementAnalytics from './pages/EngagementAnalytics';
 import AudienceAnalytics from './pages/AudienceAnalytics';
 import LinkedInCallback from './pages/LinkedInCallback';
+ jules-mcp-integration-7117090531316985338
+import FloatingChatbot from './components/FloatingChatbot';
+ main
 import { isLinkedInConnected } from './services/linkedinApi';
 
 
@@ -89,8 +92,11 @@ function App() {
           <Settings theme={theme} setTheme={setTheme} onLogout={handleLogout} />
         )}
       </div>
+      <FloatingChatbot theme={theme} />
     </div>
   );
 }
 
 export default App;
+// Trigger push
+// final push
