@@ -8,12 +8,12 @@ An open-source, privacy-first LinkedIn content creation tool. Generate, preview,
 
 You don't need to know how to code to use this tool! You can deploy your entirely own, secure copy of this application for free in about 2 minutes.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/26BB/Linkdein-Assistant-)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F26BB%2FLinkdein-Assistant-)
 
 **How to set it up:**
-1. Click the **Deploy to Netlify** button above.
-2. Connect your GitHub account when prompted. Netlify will clone this code to your GitHub and instantly deploy a live website for you.
-3. Once deployed, click the generated link to visit your new live app!
+1. Click the **Deploy with Vercel** button above. Vercel is the primary supported hosting platform for this project.
+2. Connect your GitHub account when prompted. Vercel will clone this code to your GitHub and instantly deploy a live website for you.
+3. Once deployed, click the generated link to visit your new live app! **Note:** Make sure Vercel Authentication (SSO) is disabled in your Vercel project settings (Settings > Deployment Protection) so the app is publicly accessible and doesn't show a blank screen.
 4. Go to **Settings** in the app, pick an AI provider (like OpenAI or Gemini), and paste your API key (links to get these are below).
 
 ### Setting up LinkedIn Auto-Posting
@@ -23,14 +23,16 @@ To post directly to your personal LinkedIn feed from the app, you need to create
 2. Fill in the required details (Name, LinkedIn Page, URL).
 3. Go to the **Auth** tab in your new app.
 4. Copy your **Client ID** and **Client Secret**.
-5. Under **OAuth 2.0 settings**, add your new Netlify website URL (e.g., `https://your-site.netlify.app`) to the **Authorized redirect URLs**.
+5. Under **OAuth 2.0 settings**, add your new Vercel website URL (e.g., `https://your-site.vercel.app`) to the **Authorized redirect URLs**.
 6. Open your Assistant website, go to **Settings -> LinkedIn Connection**, and paste your credentials. Done!
 
 ---
 
 ## 👩‍💻 For Developers: Running Locally
 
-If you want to modify the code, you can run the project locally. You will need Node.js and the Netlify CLI installed.
+If you want to modify the code, you can run the project locally. You only need Node.js installed. We have configured Vite to automatically mock Vercel's serverless functions so you do not need any special CLI!
+
+*Note: This project previously supported Netlify, but has been exclusively migrated to Vercel for serverless function support (`/api/*`) and SPA routing (`vercel.json`). Netlify configurations have been completely removed.*
 
 ```bash
 # 1. Clone & Install
@@ -38,11 +40,11 @@ git clone https://github.com/26BB/Linkdein-Assistant-.git
 cd Linkdein-Assistant-
 npm install
 
-# 2. Start the Application with Netlify CLI
-npx netlify-cli dev
+# 2. Start the Application
+npm run dev
 ```
 
-Open `http://localhost:8888`. The Netlify CLI is required because it securely proxies the local OAuth serverless functions located in `netlify/functions/`.
+Open `http://localhost:5173` in your browser. The application will securely proxy the local OAuth serverless functions via the custom Vite plugin.
 
 ## Supported AI Providers
 
