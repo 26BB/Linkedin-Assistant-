@@ -8,6 +8,8 @@ import Settings from './pages/Settings';
 import EngagementAnalytics from './pages/EngagementAnalytics';
 import AudienceAnalytics from './pages/AudienceAnalytics';
 import LinkedInCallback from './pages/LinkedInCallback';
+import FloatingChatbot from './components/FloatingChatbot';
+
 
 function App() {
   const [currentPath, setCurrentPath] = useState('dashboard');
@@ -79,6 +81,7 @@ function App() {
           <Settings theme={theme} setTheme={setTheme} onLogout={handleLogout} />
         )}
       </div>
+      <FloatingChatbot theme={theme} />
     </div>
   );
 }
