@@ -446,7 +446,7 @@ const Settings = ({ theme, setTheme, onLogout }) => {
             }`}
           >
             <span
-              className={`absolute top-1 w-4 h-4 rounded-full shadow-sm bg-white transition-transform duration-300 ${
+              className={`absolute top-1 left-0 w-4 h-4 rounded-full shadow-sm bg-white transition-transform duration-300 ${
                 theme === 'dark' ? 'translate-x-7' : 'translate-x-1'
               }`}
             />
