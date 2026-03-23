@@ -72,7 +72,7 @@ const FloatingChatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-10 right-10 z-[99999]">
       {/* Floating Button */}
       {!isOpen && (
         <button

@@ -31,11 +31,19 @@ function saveQuota(id, quota) {
 
 const Settings = ({ theme, setTheme, onLogout }) => {
   const [selectedProvider, setSelectedProvider] = useState(getSelectedProvider());
-  const [keys, setKeys] = useState({});
+  const [keys, setKeys] = useState(() => {
+    const initial = {};
+    PROVIDERS.forEach((p) => { initial[p.id] = getApiKey(p.id); });
+    return initial;
+  });
   const [testStatus, setTestStatus] = useState({});
   const [testError, setTestError] = useState({});
   const [saved, setSaved] = useState({});
-  const [quotas, setQuotas] = useState({});
+  const [quotas, setQuotas] = useState(() => {
+    const initial = {};
+    PROVIDERS.forEach((p) => { initial[p.id] = getQuota(p.id); });
+    return initial;
+  });
   const [showKey, setShowKey] = useState(false);
 
   const [mcpUrl, setMcpUrl] = useState(() => localStorage.getItem('mcp_url') || 'http://localhost:8000/mcp');
@@ -74,16 +82,7 @@ const Settings = ({ theme, setTheme, onLogout }) => {
 
   const provider = PROVIDERS.find((p) => p.id === selectedProvider) || PROVIDERS[0];
 
-  useEffect(() => {
-    const loadedKeys = {};
-    const loadedQuotas = {};
-    PROVIDERS.forEach((p) => {
-      loadedKeys[p.id] = getApiKey(p.id);
-      loadedQuotas[p.id] = getQuota(p.id);
-    });
-    setKeys(loadedKeys);
-    setQuotas(loadedQuotas);
-  }, []);
+
 
   const handleProviderSelect = (id) => {
     setSelectedProvider(id);
@@ -92,6 +91,7 @@ const Settings = ({ theme, setTheme, onLogout }) => {
 
   const handleKeyChange = (value) => {
     setKeys((prev) => ({ ...prev, [selectedProvider]: value }));
+    saveApiKey(selectedProvider, value);
   };
 
   const handleSaveKey = () => {
@@ -441,12 +441,12 @@ const Settings = ({ theme, setTheme, onLogout }) => {
           </div>
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${
+            className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${
               theme === 'dark' ? 'bg-anthracite' : 'bg-[#e2e3d9]'
             }`}
           >
             <span
-              className={`absolute top-1 w-5 h-5 rounded-full shadow-sm bg-white transition-all duration-300 ${
+              className={`absolute top-1 w-4 h-4 rounded-full shadow-sm bg-white transition-transform duration-300 ${
                 theme === 'dark' ? 'translate-x-7' : 'translate-x-1'
               }`}
             />
