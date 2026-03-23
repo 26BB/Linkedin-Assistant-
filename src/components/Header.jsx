@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { getLinkedInProfile } from '../services/linkedinApi';
+
 
 const Header = ({ theme, setTheme, onLogout }) => {
+    // Initialize state directly with getLinkedInProfile
+  // rather than using useEffect to avoid synchronous state updates
+  const [profile] = useState(() => getLinkedInProfile());
+
+
+
   return (
     <header className="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-[#fbf9f4]/80 dark:bg-[#0e0e0c]/80 backdrop-blur-md flex justify-between items-center h-20 px-10 border-b border-[#b1b3a9]/10 dark:border-white/5 transition-colors duration-300">
       <div className="flex items-center flex-1 max-w-xl">
@@ -37,13 +45,13 @@ const Header = ({ theme, setTheme, onLogout }) => {
         {/* User + Logout */}
         <div className="flex items-center gap-4">
           <div className="text-right hidden sm:block">
-            <p className="text-xs font-bold text-anthracite dark:text-white leading-none">Alex Rivera</p>
-            <p className="text-[10px] text-[#5e6058] dark:text-[#9e9d99] mt-1">Editorial Lead</p>
+            <p className="text-xs font-bold text-anthracite dark:text-white leading-none">{profile ? profile.name : 'Alex Rivera'}</p>
+            <p className="text-[10px] text-[#5e6058] dark:text-[#9e9d99] mt-1">{profile ? 'LinkedIn User' : 'Editorial Lead'}</p>
           </div>
           <img
             alt="User Profile Avatar"
             className="w-10 h-10 rounded-full border-2 border-white dark:border-white/10 shadow-sm transition-transform hover:scale-105 cursor-pointer"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX9-Oo4HZamUofhsiDujq7gJTywX3_nRYRefBG9dicrD5fv3tts1o15x2aHozHvsB0ryv1sh_DXc1cn86wnkGkDdOys7M4UMqQojO7SW75JQMwrnJFszObP6IYiX1TDTBntiesWJIXYWAp6i7nckIHE0paxrf6kVzDnnvNaxkPcjpr45kFGXbyEqu2Wnsy-UbY7B7yYy11iE2_hup2uGLCf99MfcIcv9SYvV9F6rXUlsZ5cjEyjKsZ68YQ0-js8M_TFZZabqZcfTje"
+            src={profile?.picture ? profile.picture : "https://lh3.googleusercontent.com/aida-public/AB6AXuAX9-Oo4HZamUofhsiDujq7gJTywX3_nRYRefBG9dicrD5fv3tts1o15x2aHozHvsB0ryv1sh_DXc1cn86wnkGkDdOys7M4UMqQojO7SW75JQMwrnJFszObP6IYiX1TDTBntiesWJIXYWAp6i7nckIHE0paxrf6kVzDnnvNaxkPcjpr45kFGXbyEqu2Wnsy-UbY7B7yYy11iE2_hup2uGLCf99MfcIcv9SYvV9F6rXUlsZ5cjEyjKsZ68YQ0-js8M_TFZZabqZcfTje"}
           />
 
           {/* Logout button */}

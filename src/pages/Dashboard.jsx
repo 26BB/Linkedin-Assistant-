@@ -25,9 +25,9 @@ const Dashboard = () => {
       {/* KPI Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         {[
-          { icon: 'visibility', label: 'Impressions', value: '1.2M', prev: 'vs 1.05M prev.', badge: '+14.2%', badgeColor: 'text-[#006499]', badgeBg: 'bg-[#62b5f7]/20' },
-          { icon: 'target', label: 'Goal Completions', value: '4,829', prev: 'vs 4,467 prev.', badge: '+8.1%', badgeColor: 'text-[#006499]', badgeBg: 'bg-[#62b5f7]/20' },
-          { icon: 'ads_click', label: 'Click-Through Rate', value: '3.42%', prev: 'vs 3.47% prev.', badge: '-1.4%', badgeColor: 'text-[#9f403d]', badgeBg: 'bg-[#fe8983]/20' },
+          { icon: 'history_edu', label: 'Total Posts Generated', value: '142', prev: 'vs 120 prev.', badge: '+18.3%', badgeColor: 'text-[#006499]', badgeBg: 'bg-[#62b5f7]/20' },
+          { icon: 'text_snippet', label: 'Words Written', value: '15.4k', prev: 'vs 12.1k prev.', badge: '+27.2%', badgeColor: 'text-[#006499]', badgeBg: 'bg-[#62b5f7]/20' },
+          { icon: 'local_fire_department', label: 'Posting Streak', value: '12 Days', prev: 'vs 8 Days prev.', badge: '+4 Days', badgeColor: 'text-[#006499]', badgeBg: 'bg-[#62b5f7]/20' },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-white dark:bg-white/5 rounded-[2rem] p-8 shadow-sm border border-[#b1b3a9]/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all group duration-500">
             <div className="flex justify-between items-start mb-8">
@@ -53,13 +53,13 @@ const Dashboard = () => {
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#f5f4ed]/5 pointer-events-none" style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }} />
         <div className="flex justify-between items-start mb-12 relative z-10">
           <div>
-            <h3 className="text-2xl font-headline font-extrabold">Conversion Trends</h3>
-            <p className="text-[#f5f4ed]/60 text-sm mt-1">Daily engagement vs lead conversion volume</p>
+            <h3 className="text-2xl font-headline font-extrabold">Content Creation Trends</h3>
+            <p className="text-[#f5f4ed]/60 text-sm mt-1">Daily words written vs posts scheduled</p>
           </div>
           <div className="flex gap-6">
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-[#62b5f7] shadow-[0_0_10px_rgba(98,181,247,0.5)]" />
-              <span className="text-xs font-bold">Conversions</span>
+              <span className="text-xs font-bold">Words Written</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-[#f5f4ed]/30" />
@@ -79,7 +79,7 @@ const Dashboard = () => {
           </svg>
           <div className="absolute top-10 left-[76%] bg-[#f5f4ed] dark:bg-[#1e1e1c] text-anthracite dark:text-white px-5 py-2.5 rounded-2xl shadow-xl text-xs flex flex-col items-center">
             <span className="font-bold">Oct 24, 2023</span>
-            <span className="mt-1 text-[#006499] font-extrabold">284 Conversions</span>
+            <span className="mt-1 text-[#006499] font-extrabold">1,284 Words</span>
             <span className="mt-1 text-[#5e6058] leading-none">▾</span>
           </div>
         </div>
@@ -90,10 +90,10 @@ const Dashboard = () => {
 
       {/* Bottom Bento Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-        {/* Audience Geography */}
+        {/* Recent Prompts Used */}
         <div className="lg:col-span-3 bg-white dark:bg-white/5 rounded-[2.5rem] p-10 shadow-sm border border-[#b1b3a9]/5 dark:border-white/5">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-headline font-extrabold text-anthracite dark:text-white">Audience Geography</h3>
+            <h3 className="text-xl font-headline font-extrabold text-anthracite dark:text-white">Top Formats Used</h3>
             <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#f5f4ed] dark:hover:bg-white/10 transition-colors">
               <span className="material-symbols-outlined text-[#5e6058] dark:text-[#9e9d99]">more_horiz</span>
             </button>
@@ -101,29 +101,29 @@ const Dashboard = () => {
           <table className="w-full">
             <thead>
               <tr className="text-left border-b border-[#b1b3a9]/10 dark:border-white/10">
-                {['Country', 'Growth', 'Traffic Share'].map((h, i) => (
+                {['Format', 'Growth', 'Usage Share'].map((h, i) => (
                   <th key={h} className={`pb-5 text-[10px] font-bold text-[#5e6058] dark:text-[#9e9d99] uppercase tracking-[0.2em] ${i > 0 ? 'text-right' : ''}`}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-[#b1b3a9]/5 dark:divide-white/5">
               {[
-                { code: 'US', name: 'United States', growth: '+22.4%', share: '42.8%', color: 'text-[#006499]' },
-                { code: 'UK', name: 'United Kingdom', growth: '+12.1%', share: '18.5%', color: 'text-[#006499]' },
-                { code: 'DE', name: 'Germany', growth: '-2.3%', share: '12.1%', color: 'text-[#9f403d]' },
-                { code: 'CA', name: 'Canada', growth: '+5.8%', share: '9.2%', color: 'text-[#006499]' },
-              ].map(country => (
-                <tr key={country.code} className="group hover:bg-[#f5f4ed]/30 dark:hover:bg-white/5 transition-all cursor-default">
+                { code: 'LI', name: 'Listicle / Step-by-step', growth: '+22.4%', share: '42.8%', color: 'text-[#006499]' },
+                { code: 'ST', name: 'Story / Personal Experience', growth: '+12.1%', share: '18.5%', color: 'text-[#006499]' },
+                { code: 'TL', name: 'Thought Leadership', growth: '-2.3%', share: '12.1%', color: 'text-[#9f403d]' },
+                { code: 'AC', name: 'Actionable Tips', growth: '+5.8%', share: '9.2%', color: 'text-[#006499]' },
+              ].map(format => (
+                <tr key={format.code} className="group hover:bg-[#f5f4ed]/30 dark:hover:bg-white/5 transition-all cursor-default">
                   <td className="py-5 flex items-center gap-4">
-                    <span className="w-8 h-8 rounded-xl bg-[#f5f4ed] dark:bg-white/10 flex items-center justify-center text-xs font-bold text-anthracite dark:text-white group-hover:scale-110 transition-transform">{country.code}</span>
-                    <span className="text-sm font-bold text-anthracite dark:text-white">{country.name}</span>
+                    <span className="w-8 h-8 rounded-xl bg-[#f5f4ed] dark:bg-white/10 flex items-center justify-center text-xs font-bold text-anthracite dark:text-white group-hover:scale-110 transition-transform">{format.code}</span>
+                    <span className="text-sm font-bold text-anthracite dark:text-white">{format.name}</span>
                   </td>
-                  <td className={`py-5 text-right text-sm font-extrabold ${country.color}`}>{country.growth}</td>
+                  <td className={`py-5 text-right text-sm font-extrabold ${format.color}`}>{format.growth}</td>
                   <td className="py-5 text-right">
                     <div className="flex items-center justify-end gap-3">
-                      <span className="text-sm font-bold text-anthracite dark:text-white">{country.share}</span>
+                      <span className="text-sm font-bold text-anthracite dark:text-white">{format.share}</span>
                       <div className="w-20 h-2 bg-[#f5f4ed] dark:bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-anthracite dark:bg-white rounded-full" style={{ width: country.share }} />
+                        <div className="h-full bg-anthracite dark:bg-white rounded-full" style={{ width: format.share }} />
                       </div>
                     </div>
                   </td>
@@ -138,8 +138,8 @@ const Dashboard = () => {
           <h3 className="text-xl font-headline font-extrabold text-anthracite dark:text-white mb-10">Performance Targets</h3>
           <div className="space-y-10 flex-1">
             {[
-              { label: 'Engagement Goal', value: '15.2k / 20k', pct: '76%', barColor: 'bg-[#006499]' },
-              { label: 'Lead Generation', value: '421 / 500', pct: '84%', barColor: 'bg-anthracite dark:bg-white' },
+              { label: 'Content Output Goal', value: '15k / 20k words', pct: '76%', barColor: 'bg-[#006499]' },
+              { label: 'Consistency Goal', value: '25 / 30 posts', pct: '84%', barColor: 'bg-anthracite dark:bg-white' },
             ].map(({ label, value, pct, barColor }) => (
               <div key={label}>
                 <div className="flex justify-between items-end mb-3">

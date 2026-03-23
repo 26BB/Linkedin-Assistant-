@@ -8,6 +8,11 @@ import Settings from './pages/Settings';
 import EngagementAnalytics from './pages/EngagementAnalytics';
 import AudienceAnalytics from './pages/AudienceAnalytics';
 import LinkedInCallback from './pages/LinkedInCallback';
+ jules-mcp-integration-7117090531316985338
+import FloatingChatbot from './components/FloatingChatbot';
+ main
+import { isLinkedInConnected } from './services/linkedinApi';
+
 
 function App() {
   const [currentPath, setCurrentPath] = useState('dashboard');
@@ -49,7 +54,15 @@ function App() {
           <p className="text-[#5e6058] text-sm mt-2">Your API keys remain stored locally in your browser.</p>
         </div>
         <button
-          onClick={() => { setLoggedOut(false); setCurrentPath('dashboard'); }}
+          onClick={() => {
+            if (isLinkedInConnected()) {
+              setLoggedOut(false);
+              setCurrentPath('dashboard');
+            } else {
+              setLoggedOut(false);
+              setCurrentPath('settings');
+            }
+          }}
           className="px-8 py-3 bg-anthracite text-white rounded-full font-bold text-sm hover:opacity-90 transition-all"
         >
           Sign back in
@@ -79,8 +92,11 @@ function App() {
           <Settings theme={theme} setTheme={setTheme} onLogout={handleLogout} />
         )}
       </div>
+      <FloatingChatbot theme={theme} />
     </div>
   );
 }
 
 export default App;
+// Trigger push
+// final push

@@ -38,6 +38,16 @@ const Settings = ({ theme, setTheme, onLogout }) => {
   const [quotas, setQuotas] = useState({});
   const [showKey, setShowKey] = useState(false);
 
+  const [mcpUrl, setMcpUrl] = useState(() => localStorage.getItem('mcp_url') || 'http://localhost:8000/mcp');
+  const [mcpSaved, setMcpSaved] = useState(false);
+
+  const handleSaveMcpUrl = () => {
+    localStorage.setItem('mcp_url', mcpUrl);
+    setMcpSaved(true);
+    setTimeout(() => setMcpSaved(false), 2000);
+  };
+
+
   // LinkedIn state
   const [liCreds, setLiCreds] = useState(() => getLinkedInCreds());
   const [liConnected, setLiConnected] = useState(() => isLinkedInConnected());
@@ -376,6 +386,38 @@ const Settings = ({ theme, setTheme, onLogout }) => {
                 <span className="ml-2 text-red-500 font-bold">⚠ Near limit</span>
               )}
             </p>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ── MCP Configuration ── */}
+      <section className="mb-8">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#5e6058] dark:text-[#9e9d99] mb-3">
+          Local MCP Server (Advanced)
+        </h3>
+        <div className="bg-white dark:bg-[#1e1e1c] rounded-2xl p-6 border border-[#b1b3a9]/10 dark:border-white/5 shadow-sm">
+          <p className="text-[11px] text-[#5e6058] dark:text-[#9e9d99] mb-4">
+            Connect to a local LinkedIn MCP Server for real-time analysis and the floating AI chatbot. Run <code className="bg-[#f5f4ed] dark:bg-white/10 px-1.5 py-0.5 rounded text-[10px] font-mono">uvx linkedin-scraper-mcp --transport streamable-http --host 127.0.0.1 --port 8000 --path /mcp</code> locally.
+          </p>
+          <div className="flex gap-3">
+            <input
+              type="text"
+              value={mcpUrl}
+              onChange={(e) => setMcpUrl(e.target.value)}
+              placeholder="http://localhost:8000/mcp"
+              className="flex-1 bg-[#f5f4ed] dark:bg-[#2a2a28] border border-[#b1b3a9]/10 dark:border-white/5 rounded-xl py-3 px-4 text-sm font-mono focus:ring-2 focus:ring-anthracite focus:border-transparent transition-all outline-none text-anthracite dark:text-white placeholder-[#9e9d99]"
+            />
+            <button
+              onClick={handleSaveMcpUrl}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                mcpSaved
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-[#e2e3d9] dark:bg-white/10 text-anthracite dark:text-white hover:bg-[#d5d6cc]'
+              }`}
+            >
+              {mcpSaved ? '✓ Saved' : 'Save'}
+            </button>
           </div>
         </div>
       </section>

@@ -131,7 +131,7 @@ const EngagementAnalytics = () => {
                 <div className="flex justify-between items-center text-[#5e6058] text-sm font-medium pt-4 border-t border-[#b1b3a9]/10">
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1"><span className="material-symbols-outlined text-base">thumb_up</span> {post.likes}</span>
-                    <span className="flex items-center gap-1"><span className="material-symbols-outlined text-base">chat_bubble</span> {post.comments}</span>
+                    <span className="flex items-center gap-1"><span className="material-symbols-outlined text-base">fiber_manual_record</span> {post.comments}</span>
                   </div>
                   <div className="flex items-center text-[#006499]">
                     <span className="font-bold">{post.er} ER</span>
